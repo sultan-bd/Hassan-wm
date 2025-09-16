@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="x-dns-prefetch-control" content="on" />
+    <meta name="theme-color" content="#ee9f0d" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Alexandria:wght@100..900&display=swap" rel="stylesheet" />
+    <link rel="shortcut icon" href="/assets/favicon/favicon.svg" type="image/svg+xml" />
+
+    <link rel="stylesheet" href="/assets/css/crud-mine.css" />
+    <link rel="stylesheet" href="/assets/css/button-loading.css?v=1.10" />
+    <link rel="stylesheet" href="/assets/css/crud.css" />
+    <title>جميع البيانات - المصروف</title>
+  </head>
+  <body class="data-page">
+    <div class="container">
+      <header>
+        <span class="plain-text">( حسن ) </span>
+        <span class="gradient-text">بيانات المصروف</span>
+        <button type="button" class="logout-btn" id="logoutBtn" title="تسجيل الخروج">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16,17 21,12 16,7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+        </button>
+      </header>
+
+      <div class="data-container">
+        <div class="data-header">
+          <div class="data-title">
+            <span>📂</span>
+            <span>بيانات المصروف</span>
+          </div>
+          <div class="input-group search-field">
+            <span class="search-icon" aria-hidden="true">
+              <svg class="icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </span>
+            <input id="searchInput" class="input-control" placeholder="بحث..." />
+          </div>
+        </div>
+
+        <div class="data-toolbar">
+          <div class="input-group">
+            <button type="button" class="btn danger btn-ripple" id="btn-delete-selected" title="حذ�� المحدد">
+              <svg class="icon" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path></svg>
+              حذف المحدد
+            </button>
+            <button type="button" class="btn secondary btn-ripple" id="btn-print-selected" title="طباعة المحدد">
+              <svg class="icon" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"></polyline><rect x="6" y="13" width="12" height="8" rx="2"></rect><path d="M6 17h12"></path></svg>
+              طباعة المحدد
+            </button>
+            <button type="button" class="btn secondary btn-ripple" id="btn-print-all" title="طباعة الكل">
+              <svg class="icon" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"></polyline><rect x="6" y="13" width="12" height="8" rx="2"></rect><path d="M6 17h12"></path></svg>
+              طباعة الكل
+            </button>
+            <button type="button" class="btn btn-ripple" id="btn-pdf-selected" title="PDF للمحدد">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+              PDF
+            </button>
+            <button type="button" class="btn btn-ripple" id="btn-pdf-all" title="PDF للكل">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+              PDF الكل
+            </button>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <table class="data-table" id="dataTable">
+            <thead>
+              <tr>
+                <th style="width:36px"><input type="checkbox" id="selectAll" /></th>
+                <th data-sort="number">الرقم</th>
+                <th data-sort="name">الاسم</th>
+                <th data-sort="work">العمل</th>
+                <th data-sort="paymentType">طريقة الدفع</th>
+                <th data-sort="sar">المبلغ</th>
+                <th data-sort="date">التاريخ</th>
+                <th data-sort="category">الفئة</th>
+                <th style="width:140px">الإجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <tr><td colspan="9"><div class="empty-state">لا توجد بيانات بعد. سيتم تحميل البيانات فوراً...</div></td></tr>
+            </tbody>
+          </table>
+          <div class="pagination" id="pagination"></div>
+        </div>
+
+        <div class="undo-bar" id="undoBar">
+          <span id="undoText">تم حذف العناصر. سيتم الإزالة نهائياً خلال <b id="undoTimer">10</b> ثوانٍ</span>
+          <button class="undo-btn" id="undoBtn">تراجع</button>
+        </div>
+
+        <div class="toast-container" id="toastContainer"></div>
+
+        <div class="modal" id="confirmModal" role="dialog" aria-modal="true">
+          <div class="modal-card">
+            <div class="modal-header">
+              <h3>تأكيد الحذف</h3>
+              <button class="btn ghost" id="confirmClose">✖</button>
+            </div>
+            <p>هل تريد بالتأكيد حذف العنصر/العناصر؟</p>
+            <div class="modal-actions">
+              <button class="btn ghost" id="btnCancelDelete">إلغاء</button>
+              <button class="btn danger" id="btnConfirmDelete">حذف</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal" id="editModal" role="dialog" aria-modal="true">
+          <div class="modal-card">
+            <div class="modal-header">
+              <h3>تحرير البيانات</h3>
+              <button class="btn ghost" id="editClose">✖</button>
+            </div>
+            <form id="editForm">
+              <div class="edit-grid">
+                <div class="input-group"><label>الرقم</label><input class="input-control" id="editNumber" required /></div>
+                <div class="input-group"><label>الاسم</label><input class="input-control" id="editName" required /></div>
+                <div class="input-group"><label>العمل</label><input class="input-control" id="editWork" /></div>
+                <div class="input-group"><label>طريقة الدفع</label><input class="input-control" id="editPaymentType" /></div>
+                <div class="input-group"><label>المبلغ (ريال)</label><input type="number" step="0.01" class="input-control" id="editSar" required /></div>
+                <div class="input-group"><label>التاريخ</label><input type="date" class="input-control" id="editDate" required /></div>
+                <div class="input-group"><label>الفئة</label>
+                  <select class="input-control" id="editCategory">
+                    <option value="income">دخل</option>
+                    <option value="expense">مصروف</option>
+                    <option value="report">تقرير</option>
+                  </select>
+                </div>
+              </div>
+              <div class="modal-actions">
+                <button type="button" class="btn ghost" id="btnCancelEdit">إلغاء</button>
+                <button type="submit" class="btn" id="btnSaveEdit">حفظ</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <footer class="premium-footer">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span class="brand-icon">⚡</span>
+            <span class="brand-text">صُنع بواسطة</span>
+            <a href="https://www.sultan-web.site" target="_blank" class="brand-link">سلطان</a>
+          </div>
+          <div class="footer-version">
+            <span class="version-text">الإصدار</span>
+            <span class="version-number">v1.10</span>
+          </div>
+        </div>
+        <div class="footer-decoration"></div>
+      </footer>
+    </div>
+
+    <script>window.DATA_CATEGORY='expense';</script>
+    <script type="module" src="/assets/js/firebase-config.js?v=1.10"></script>
+    <script src="/assets/js/auth-protection.js?v=1.10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.5.31/dist/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="/assets/js/crud.js"></script>
+  </body>
+</html>

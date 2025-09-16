@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <!-- Performance optimizations -->
+    <meta http-equiv="x-dns-prefetch-control" content="on" />
+    <meta name="theme-color" content="#ee9f0d" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Preload critical images -->
+    <link rel="preload" href="/assets/img/bb.jpeg" as="image" />
+    <!-- Async load fonts for better performance -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Alexandria:wght@100..900&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Alexandria:wght@100..900&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+    <link
+      rel="shortcut icon"
+      href="/assets/favicon/favicon.svg"
+      type="image/svg+xml"
+    />
+    <link rel="stylesheet" href="/assets/css/style.css?v=1.10" />
+    <link rel="stylesheet" href="/assets/css/button-loading.css?v=1.10" />
+    <!-- Welcome Popup CSS - Easy to remove by deleting this line -->
+
+    <title>Log in - Hassan</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="welcome-message">
+        <h1>مرحباً بك مرة أخرى !<span class="gradient-text">حسن</span></h1>
+        <p>يسعدني رؤيتك مرة أخرى 😊</p>
+      </div>
+      <h2>تسجيل الدخول</h2>
+      <form name="loginForm" action="#">
+        <div class="input-box">
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder=" "
+            required
+          />
+          <label for="username">اسم المستخدم أو البريد الإلكتروني</label>
+          <span class="error-message" id="usernameError"></span>
+        </div>
+        <div class="input-box">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder=" "
+            required
+          />
+          <label for="password">كلمة المرور</label>
+          <button
+            type="button"
+            class="password-toggle"
+            id="passwordToggle"
+            aria-label="Toggle password visibility"
+          >
+            <svg
+              class="eye-icon"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
+          <span class="error-message" id="passwordError"></span>
+        </div>
+        <a
+          href="forgot-password.html"
+          class="forget-password-link"
+          id="forgetPasswordLink"
+        >
+          نسيت كلمة المرور؟
+        </a>
+        <div class="input-box button">
+          <button type="submit" class="submit btn-ripple" id="loginButton">
+            <span>تسجيل الدخول</span>
+          </button>
+        </div>
+        <div class="text" id="loginMessage"></div>
+      </form>
+    </div>
+
+    <!-- Critical scripts loaded first -->
+    <script src="/assets/js/security-config.js?v=1.10"></script>
+    <script src="/assets/js/protection.js?v=1.10"></script>
+    <script src="/assets/js/auth.js?v=1.10"></script>
+    <script src="/assets/js/button-loading.js?v=1.10"></script>
+    <script type="module" src="/assets/js/firebase-config.js?v=1.10"></script>
+    <script src="/assets/js/login.js?v=1.8"></script>
+    <script src="/assets/js/auth-protection.js?v=1.10"></script>
+    <!-- Welcome Popup Manager - Easy to remove by deleting this line -->
+  </body>
+</html>

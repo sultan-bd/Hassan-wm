@@ -1,0 +1,398 @@
+/* Balance Tracker Module - Easily Removable */
+/* Matches main website design with custom enhancements */
+.balance-tracker-module {
+  background: linear-gradient(135deg, #14243b 0%, #1e3052 50%, #14243b 100%);
+  border-radius: 20px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(238, 159, 13, 0.2);
+}
+
+/* Shine Effect */
+.balance-tracker-module::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    rgba(238, 159, 13, 0.1),
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 1.5s ease-in-out;
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.balance-tracker-module:hover::before {
+  animation-duration: 1s;
+}
+
+/* Header Section */
+.balance-tracker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.balance-tracker-title {
+  color: #ffd149;
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: "Alexandria", sans-serif;
+  text-shadow: 0 0 10px rgba(255, 209, 73, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.balance-tracker-toggle {
+  background: rgba(238, 159, 13, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #ffd149;
+}
+
+.balance-tracker-toggle:hover {
+  background: rgba(238, 159, 13, 0.3);
+  transform: scale(1.1) rotate(90deg);
+  box-shadow: 0 0 15px rgba(238, 159, 13, 0.4);
+}
+
+.balance-tracker-toggle svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+/* Main Balance Display */
+.balance-tracker-display {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 15px;
+  padding: 1.5rem 3.5rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: row-reverse; /* 👈 Move icon to the LEFT side */
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 2;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.balance-tracker-display:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* SAR Icon - Inline with Amount */
+.balance-sar-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.balance-sar-icon svg {
+  width: 2rem;
+  height: 2rem;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+  transition: all 0.3s ease;
+}
+
+.balance-tracker-display:hover .balance-sar-icon svg {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.5));
+}
+
+/* Balance Amount - Inline with Icon */
+.balance-amount-container {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.balance-amount {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-shadow: 0 0 15px rgba(238, 159, 13, 0.4);
+  transition: all 0.3s ease;
+  font-family: "Rubik", sans-serif;
+  direction: ltr;
+  display: inline-block;
+    font-family: "Alexandria", serif;
+  background: linear-gradient(to right, #ff6a00, #f8a203, #ff6a00);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-size: 200% auto;
+  animation: gradientAnimation 3s linear infinite;
+}
+
+
+
+
+
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 200% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+.balance-amount.loading {
+  opacity: 0.7;
+  animation: pulse 1.5s infinite;
+}
+
+.balance-amount.masked {
+  letter-spacing: 8px;
+  font-family: monospace;
+  color: rgba(255, 209, 73, 0.6);
+}
+
+.balance-label {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 0.25rem;
+  font-weight: 500;
+}
+
+/* Loading Animation */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+.balance-loading-spinner {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 3px solid rgba(238, 159, 13, 0.3);
+  border-radius: 50%;
+  border-top-color: #ffd149;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Toggle Button for Show/Hide */
+.balance-visibility-toggle {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: rgba(255, 255, 255, 0.6);
+  z-index: 3;
+}
+
+.balance-visibility-toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.9);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.balance-visibility-toggle svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+/* Hidden State */
+.balance-tracker-module.hidden {
+  max-height: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(-20px);
+}
+
+/* Mini Toggle Button (when hidden) */
+.balance-mini-toggle {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: #14243b;
+  color: #ffd149;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 20px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  border: 2px solid rgba(238, 159, 13, 0.3);
+}
+
+.balance-mini-toggle.visible {
+  display: flex;
+  animation: popIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.balance-mini-toggle:hover {
+  background: #1e3052;
+  transform: scale(1.1);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(-180deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(-90deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.balance-mini-toggle svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.balance-mini-toggle:hover svg {
+  transform: rotate(15deg);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .balance-tracker-module {
+    margin: 1rem 0;
+    padding: 1.25rem;
+  }
+
+  .balance-amount {
+    font-size: 1.5rem;
+  }
+
+  .balance-sar-icon svg {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  .balance-tracker-display {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .balance-tracker-module {
+    margin: 0.75rem 0;
+    padding: 1rem;
+  }
+
+  .balance-amount {
+    font-size: 1.3rem;
+  }
+
+  .balance-sar-icon svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .balance-tracker-display {
+    padding: 1rem;
+    gap: 0.75rem;
+  }
+
+  .balance-mini-toggle {
+    bottom: 1.5rem;
+    left: 1.5rem;
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+/* Error State */
+.balance-error {
+  color: #ff6b6b;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 0.5rem;
+  background: rgba(255, 107, 107, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 107, 107, 0.2);
+}
+
+/* Success Animation */
+.balance-updated {
+  animation: balanceUpdate 0.6s ease-out;
+}
+
+@keyframes balanceUpdate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+    text-shadow: 0 0 20px rgba(238, 159, 13, 0.6);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

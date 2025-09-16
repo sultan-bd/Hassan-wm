@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <!-- Performance optimizations -->
+    <meta http-equiv="x-dns-prefetch-control" content="on" />
+    <meta name="theme-color" content="#ee9f0d" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Async load fonts for better performance -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Alexandria:wght@100..900&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Alexandria:wght@100..900&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+    <link
+      rel="shortcut icon"
+      href="/assets/favicon/favicon.svg"
+      type="image/svg+xml"
+    />
+    <link rel="stylesheet" href="/assets/css/mines.css?v=1.10" />
+    <link rel="stylesheet" href="/assets/css/button-loading.css?v=1.10" />
+    <link rel="stylesheet" href="/assets/css/balance-tracker.css?v=1.10" />
+
+    <title>مكتب أبو عوض - Hassan</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <span class="plain-text">( حسن ) </span>
+        <span class="gradient-text">مصروفات حسن</span>
+        <button
+          type="button"
+          class="logout-btn"
+          id="logoutBtn"
+          title="تسجيل الخروج"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16,17 21,12 16,7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+        </button>
+      </header>
+
+ <!-- Balance Tracker Module - Easy to Remove -->
+      <div id="balance-tracker"></div>
+
+      <form id="submitForm">
+        <div class="fields">
+          <div class="input-field">
+            <input
+              type="number"
+              id="number"
+              name="number"
+              placeholder=" "
+              required
+            />
+            <label for="number">رقم</label>
+          </div>
+          <div class="input-field">
+            <select id="name" required>
+              <option value="" disabled selected>اختر الاسم</option>
+              <option>حسن</option>
+            </select>
+            <label for="name">الاسم</label>
+          </div>
+          <div class="input-field">
+            <input type="number" id="sar" placeholder=" " required />
+            <label for="sar">ريال</label>
+          </div>
+          <div class="input-field">
+            <input type="date" id="date" name="date" required />
+            <label for="date">التاريخ</label>
+          </div>
+        </div>
+        <button type="submit" class="submit btn-ripple">
+          <span>إرسال</span>
+        </button>
+        <div id="feedback"></div>
+        <div class="text">
+          <h3>هل تريد كتابة تقرير عملك؟<a href="/">انقر هنا</a></h3>
+        </div>
+      </form>
+
+      <footer class="premium-footer">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span class="brand-icon">⚡</span>
+            <span class="brand-text">صُنع بواسطة</span>
+            <a
+              href="https://www.sultan-web.site"
+              target="_blank"
+              class="brand-link"
+              >سلطان</a
+            >
+          </div>
+          <div class="footer-version">
+            <span class="version-text">الإصدار</span>
+            <span class="version-number">v1.10</span>
+          </div>
+        </div>
+        <div class="footer-decoration"></div>
+      </footer>
+    </div>
+    <!-- Critical scripts loaded first -->
+    <script type="module" src="/assets/js/firebase-config.js?v=1.10"></script>
+    <script src="/assets/js/protection.js?v=1.10"></script>
+    <script src="/assets/js/button-loading.js?v=1.10"></script>
+    <script src="/assets/js/mines.js?v=1.10"></script>
+    <script src="/assets/js/auth-protection.js?v=1.10"></script>
+    <script src="/assets/js/balance-trackers.js?v=1.10"></script>
+  </body>
+</html>

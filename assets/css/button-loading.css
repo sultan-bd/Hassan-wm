@@ -1,0 +1,665 @@
+/* ===== PREMIUM LIQUID GLASS BUTTON SYSTEM ===== */
+/* Beautiful buttons with liquid glass effects and smooth animations */
+
+:root {
+  --btn-primary: #ee9f0d;
+  --btn-primary-dark: #d48c0c;
+  --btn-primary-light: #ffd149;
+  --btn-secondary: #ff6a00;
+  --btn-accent: #f8a203;
+  --btn-glass: rgba(255, 255, 255, 0.25);
+  --btn-glass-border: rgba(255, 255, 255, 0.4);
+  --btn-shadow: 0 8px 32px rgba(238, 159, 13, 0.25);
+  --btn-shadow-hover: 0 12px 40px rgba(238, 159, 13, 0.35);
+  --btn-transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* ===== PRIMARY BUTTON (Submit/Login) ===== */
+.input-box.button input,
+input[type="submit"],
+button[type="submit"],
+.submit,
+.btn-primary {
+  position: relative;
+  color: #fff;
+  text-align: center;
+  line-height: normal;
+  letter-spacing: 0.5px;
+  border: none;
+  height: 3.25rem;
+  max-width: 200px;
+  width: 100%;
+  margin: 0;
+  border-radius: 18px;
+  display: block;
+  cursor: pointer;
+  font-family: "Rubik", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: var(--btn-transition);
+  overflow: hidden;
+
+  /* Liquid Glass Background */
+  background: linear-gradient(
+    135deg,
+    var(--btn-primary) 0%,
+    var(--btn-secondary) 50%,
+    var(--btn-accent) 100%
+  );
+
+  /* Glass Effect */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  /* Enhanced Shadow */
+  box-shadow:
+    var(--btn-shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+
+  /* Border Glass Effect */
+  border: 1px solid var(--btn-glass-border);
+}
+
+/* Liquid Glass Overlay */
+.input-box.button input::before,
+input[type="submit"]::before,
+button[type="submit"]::before,
+.submit::before,
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    var(--btn-glass) 0%,
+    transparent 50%,
+    var(--btn-glass) 100%
+  );
+  border-radius: 18px;
+  z-index: 1;
+  transition: var(--btn-transition);
+}
+
+/* Classic Sweep Shine Effect */
+.input-box.button input,
+button[type="submit"],
+.btn-primary,
+.logout-btn,
+.btn-secondary {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Professional smooth shine sweep effect */
+.input-box.button input::after,
+.input-box.button input[type="submit"]::after,
+input[type="submit"]::after,
+button[type="submit"]::after,
+.submit::after,
+.btn-primary::after,
+.logout-btn::after,
+.btn-secondary::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 15%,
+    rgba(255, 255, 255, 0.4) 35%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0.4) 65%,
+    rgba(255, 255, 255, 0.15) 85%,
+    transparent 100%
+  );
+  z-index: 5;
+  transform: skewX(-15deg);
+  border-radius: inherit;
+  transition: none;
+  filter: blur(1px);
+  mix-blend-mode: overlay;
+}
+
+/* Smooth shine effect triggers */
+.input-box.button input:hover::after,
+.input-box.button input[type="submit"]:hover::after,
+input[type="submit"]:hover::after,
+button[type="submit"]:hover::after,
+.submit:hover::after,
+.btn-primary:hover::after,
+.logout-btn:hover::after,
+.btn-secondary:hover::after,
+.shine-effect::after {
+  animation: sweepShineSmooth 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Click animation - left to right */
+.input-box.button input:active::after,
+.input-box.button input[type="submit"]:active::after,
+input[type="submit"]:active::after,
+button[type="submit"]:active::after,
+.submit:active::after,
+.btn-primary:active::after,
+.logout-btn:active::after,
+.btn-secondary:active::after,
+.shine-click::after {
+  animation: sweepShineClick 0.6s cubic-bezier(0.2, 0, 0.8, 1);
+}
+
+/* Release animation - right to left */
+.shine-release::after {
+  animation: sweepShineRelease 0.5s cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+/* Subtle button enhancement during shine */
+.input-box.button input:hover,
+.input-box.button input[type="submit"]:hover,
+input[type="submit"]:hover,
+button[type="submit"]:hover,
+.submit:hover,
+.btn-primary:hover,
+.logout-btn:hover,
+.btn-secondary:hover {
+  filter: brightness(1.05) saturate(1.1) contrast(1.02);
+  transition: filter 0.3s ease;
+}
+
+.input-box.button input:active,
+.input-box.button input[type="submit"]:active,
+input[type="submit"]:active,
+button[type="submit"]:active,
+.submit:active,
+.btn-primary:active,
+.logout-btn:active,
+.btn-secondary:active,
+.shine-effect {
+  filter: brightness(0.95) saturate(1.15) contrast(1.05);
+  transition: filter 0.2s ease;
+}
+
+/* Smooth shine animation keyframes */
+@keyframes sweepShineSmooth {
+  0% {
+    left: -100%;
+    opacity: 0;
+    transform: skewX(-15deg) scale(0.8);
+  }
+  15% {
+    opacity: 0.6;
+    transform: skewX(-15deg) scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: skewX(-15deg) scale(1);
+  }
+  85% {
+    opacity: 0.6;
+    transform: skewX(-15deg) scale(0.9);
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+    transform: skewX(-15deg) scale(0.8);
+  }
+}
+
+/* Click shine - left to right */
+@keyframes sweepShineClick {
+  0% {
+    left: -100%;
+    opacity: 0;
+    transform: skewX(-20deg);
+  }
+  30% {
+    opacity: 0.8;
+    transform: skewX(-20deg);
+  }
+  70% {
+    opacity: 0.8;
+    transform: skewX(-20deg);
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+    transform: skewX(-20deg);
+  }
+}
+
+/* Release shine - right to left */
+@keyframes sweepShineRelease {
+  0% {
+    left: 100%;
+    opacity: 0;
+    transform: skewX(20deg);
+  }
+  30% {
+    opacity: 0.6;
+    transform: skewX(20deg);
+  }
+  70% {
+    opacity: 0.6;
+    transform: skewX(20deg);
+  }
+  100% {
+    left: -100%;
+    opacity: 0;
+    transform: skewX(20deg);
+  }
+}
+
+/* Button Text */
+.input-box.button input,
+input[type="submit"],
+button[type="submit"],
+.submit,
+.btn-primary {
+  position: relative;
+  z-index: 3;
+}
+
+/* Hover Effects */
+.input-box.button input:hover:not(:disabled),
+input[type="submit"]:hover:not(:disabled),
+button[type="submit"]:hover:not(:disabled),
+.submit:hover:not(:disabled),
+.btn-primary:hover:not(:disabled) {
+  box-shadow:
+    var(--btn-shadow-hover),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1),
+    0 0 25px rgba(238, 159, 13, 0.4);
+
+  /* Enhanced Glass Effect on Hover */
+  background: linear-gradient(
+    135deg,
+    var(--btn-primary-light) 0%,
+    var(--btn-primary) 50%,
+    var(--btn-secondary) 100%
+  );
+}
+
+.input-box.button input:hover::before,
+input[type="submit"]:hover::before,
+button[type="submit"]:hover::before,
+.submit:hover::before,
+.btn-primary:hover::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.35) 0%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.35) 100%
+  );
+}
+
+/* Active/Click Effects */
+.input-box.button input:active,
+input[type="submit"]:active,
+button[type="submit"]:active,
+.submit:active,
+.btn-primary:active {
+  opacity: 0.9;
+  transition: all 0.08s ease;
+}
+
+/* Disabled State */
+.input-box.button input:disabled,
+input[type="submit"]:disabled,
+button[type="submit"]:disabled,
+.submit:disabled,
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  background: linear-gradient(135deg, #ccc 0%, #999 100%);
+}
+
+/* ===== SECONDARY BUTTONS (Logout, etc.) ===== */
+.logout-btn,
+.btn-secondary {
+  position: relative;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 14px;
+  padding: 0.75rem;
+  color: #fff;
+  cursor: pointer;
+  transition: var(--btn-transition);
+  overflow: hidden;
+
+  /* Enhanced Shadow */
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* Logout Button Specific Positioning */
+.logout-btn {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Glass Morphism Effect */
+.logout-btn::before,
+.btn-secondary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%,
+    rgba(238, 159, 13, 0.05) 100%
+  );
+  border-radius: inherit;
+  z-index: 1;
+  transition: var(--btn-transition);
+}
+
+/* Hover Effects for Secondary Buttons */
+.logout-btn:hover,
+.btn-secondary:hover {
+  background: rgba(238, 159, 13, 0.25);
+  border-color: rgba(238, 159, 13, 0.4);
+  box-shadow:
+    0 6px 25px rgba(238, 159, 13, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.logout-btn:hover::before,
+.btn-secondary:hover::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(238, 159, 13, 0.1) 50%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
+}
+
+/* Active Effects */
+.logout-btn:active,
+.btn-secondary:active {
+  opacity: 0.8;
+  transition: all 0.08s ease;
+}
+
+/* Icon Styling */
+.logout-btn svg,
+.btn-secondary svg {
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+}
+
+.logout-btn:hover svg,
+.btn-secondary:hover svg {
+  transform: translateX(1px) scale(1.1);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* ===== FLOATING ACTION BUTTONS ===== */
+.btn-floating {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: linear-gradient(
+    135deg,
+    var(--btn-primary) 0%,
+    var(--btn-secondary) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 8px 32px rgba(238, 159, 13, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  cursor: pointer;
+  transition: var(--btn-transition);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.btn-floating::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
+  border-radius: inherit;
+}
+
+.btn-floating:hover {
+  box-shadow:
+    0 12px 40px rgba(238, 159, 13, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* ===== SHIMMER ANIMATION ===== */
+@keyframes shimmerFlow {
+  0% {
+    left: -100%;
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+/* ===== RIPPLE EFFECT ===== */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-ripple::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.6s,
+    height 0.6s;
+}
+
+.btn-ripple:active::after {
+  width: 200px;
+  height: 200px;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .input-box.button input,
+  button[type="submit"],
+  .btn-primary {
+    height: 3rem;
+    font-size: 0.95rem;
+    border-radius: 16px;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .logout-btn {
+    width: 42px;
+    height: 42px;
+    left: 10px;
+    border-radius: 13px;
+  }
+
+  .logout-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .btn-floating {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .input-box.button input,
+  button[type="submit"],
+  .btn-primary {
+    height: 2.875rem;
+    font-size: 0.9rem;
+    border-radius: 14px;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .logout-btn {
+    width: 38px;
+    height: 38px;
+    left: 8px;
+    border-radius: 11px;
+  }
+
+  .logout-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .btn-floating {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .logout-btn {
+    width: 34px;
+    height: 34px;
+    left: 6px;
+    border-radius: 9px;
+  }
+
+  .logout-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* ===== ENHANCED INTERACTIONS ===== */
+/* Removed hover glow animation to prevent jumping */
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+  .input-box.button input,
+  button[type="submit"],
+  .btn-primary,
+  .logout-btn,
+  .btn-secondary,
+  .btn-floating {
+    transition: none;
+    animation: none;
+  }
+
+  .input-box.button input::after,
+  button[type="submit"]::after,
+  .btn-primary::after {
+    display: none;
+  }
+}
+
+/* Focus states for accessibility */
+.input-box.button input:focus,
+button[type="submit"]:focus,
+.btn-primary:focus,
+.logout-btn:focus,
+.btn-secondary:focus {
+  outline: 2px solid rgba(238, 159, 13, 0.5);
+  outline-offset: 2px;
+}
+
+/* ===== LOADING STATE FOR BUTTONS ===== */
+.btn-loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.btn-loading::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  animation: loadingShimmer 1.5s ease-in-out infinite;
+}
+
+.btn-loading span {
+  opacity: 0;
+}
+
+.btn-loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: spin 1s linear infinite;
+  z-index: 4;
+}
+
+@keyframes loadingShimmer {
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
