@@ -140,30 +140,46 @@
 
   function rowTemplate(it){
     const checked = state.selectedIds.has(it.id)?'checked':'';
-    return `<tr data-id="${it.id}">
-      <td><input type="checkbox" class="row-check" ${checked} /></td>
-      <td>${it.number||''}</td>
-      <td>${it.name||''}</td>
-      <td>${it.work||''}</td>
-      <td>${it.paymentType||''}</td>
-      <td class="badge-money">${formatAmount(it.sar)}</td>
-      <td>${it.date||''}</td>
-      <td>${it.category||''}</td>
-      <td class="actions">
-        <button class="icon-btn btn-edit" title="تعديل"><svg class="icon" viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
-        <button class="icon-btn btn-delete" title="حذف"><svg class="icon" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path></svg></button>
-      </td>
-    </tr>`;
+    const cat = (window.DATA_CATEGORY||'').trim();
+    
+    if (cat === 'expense') {
+      // Hassan.html format: رقم، اسم، ريال، تاريخ
+      return `<tr data-id="${it.id}">
+        <td><input type="checkbox" class="row-check" ${checked} /></td>
+        <td>${it.number||''}</td>
+        <td>${it.name||''}</td>
+        <td class="badge-money">${formatAmount(it.sar)}</td>
+        <td>${it.date||''}</td>
+        <td class="actions">
+          <button class="icon-btn btn-edit" title="تعديل"><svg class="icon" viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+          <button class="icon-btn btn-delete" title="حذف"><svg class="icon" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path></svg></button>
+        </td>
+      </tr>`;
+    } else {
+      // Index.html format: رقم، اسم، عمل، نوع الدفع، ريال، تاريخ
+      return `<tr data-id="${it.id}">
+        <td><input type="checkbox" class="row-check" ${checked} /></td>
+        <td>${it.number||''}</td>
+        <td>${it.name||''}</td>
+        <td>${it.work||''}</td>
+        <td>${it.paymentType||''}</td>
+        <td class="badge-money">${formatAmount(it.sar)}</td>
+        <td>${it.date||''}</td>
+        <td class="actions">
+          <button class="icon-btn btn-edit" title="تعديل"><svg class="icon" viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+          <button class="icon-btn btn-delete" title="حذف"><svg class="icon" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path></svg></button>
+        </td>
+      </tr>`;
+    }
   }
 
   function renderTable(){
     const body = $('tableBody');
     const view = paginate(state.filtered);
     if(!view.length){
-      body.innerHTML = `<tr><td colspan="9"><div class="empty-state" role="status" aria-live="polite">
-        <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="#ee9f0d" stroke-width="1.5" style="margin-bottom:8px"><path d="M3 7h18"></path><path d="M3 7l4-4h10l4 4"></path><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 13h8"></path><path d="M8 17h5"></path></svg>
-        <div>لا توجد بيانات لعرضها</div>
-      </div></td></tr>`;
+      const cat = (window.DATA_CATEGORY||'').trim();
+      const colspan = cat === 'expense' ? '6' : '8';
+      body.innerHTML = `<tr><td colspan="${colspan}"><div class="empty-state" role="status" aria-live="polite">لا توجد بيانات لعرضها</div></td></tr>`;
     } else {
       body.innerHTML = view.map(rowTemplate).join('');
     }
@@ -282,27 +298,46 @@
     if(!it) return;
     $('editNumber').value = it.number||'';
     $('editName').value = it.name||'';
-    $('editWork').value = it.work||'';
-    $('editPaymentType').value = it.paymentType||'';
     $('editSar').value = it.sar||'';
     $('editDate').value = it.date||'';
-    $('editCategory').value = it.category||'';
+    
+    // Only set work and payment type for income category
+    const cat = (window.DATA_CATEGORY||'').trim();
+    if (cat !== 'expense') {
+      const workField = $('editWork');
+      const paymentField = $('editPaymentType');
+      if (workField) workField.value = it.work||'';
+      if (paymentField) paymentField.value = it.paymentType||'';
+    }
+    
     editModal(true);
   }
 
   function saveEdit(e){
     e.preventDefault();
     const id = state.editingId; if(!id) return;
-    const data = {
+    
+    const baseData = {
       number: $('editNumber').value.trim(),
       name: $('editName').value.trim(),
-      work: $('editWork').value.trim(),
-      paymentType: $('editPaymentType').value.trim(),
       sar: parseFloat($('editSar').value||0),
       date: $('editDate').value,
-      category: $('editCategory').value,
       updatedAt: Date.now(),
     };
+    
+    // Add work and payment type only for income category
+    const cat = (window.DATA_CATEGORY||'').trim();
+    if (cat !== 'expense') {
+      const workField = $('editWork');
+      const paymentField = $('editPaymentType');
+      if (workField) baseData.work = workField.value.trim();
+      if (paymentField) baseData.paymentType = paymentField.value.trim();
+    }
+    
+    // Set category based on current page
+    baseData.category = cat || 'income';
+    
+    const data = baseData;
     if(!data.name){ toast('الاسم مطلوب','error'); return; }
     if(isNaN(data.sar)){ toast('المبلغ غير صا��ح','error'); return; }
 
@@ -363,6 +398,16 @@
     const container = document.createElement('div');
     container.setAttribute('dir','rtl');
     container.style.position='fixed'; container.style.left='-99999px'; container.style.top='0';
+    
+    const cat = (window.DATA_CATEGORY||'').trim();
+    const headers = cat === 'expense' 
+      ? '<th class="pdf-th">الرقم</th><th class="pdf-th">الاسم</th><th class="pdf-th">المبلغ</th><th class="pdf-th">التاريخ</th>'
+      : '<th class="pdf-th">الرقم</th><th class="pdf-th">الاسم</th><th class="pdf-th">العمل</th><th class="pdf-th">طريقة الدفع</th><th class="pdf-th">المبلغ</th><th class="pdf-th">التاريخ</th>';
+    
+    const rowData = cat === 'expense'
+      ? rows.map(r=>`<tr><td class="pdf-td">${r.number||''}</td><td class="pdf-td">${r.name||''}</td><td class="pdf-td">${formatAmount(r.sar)}</td><td class="pdf-td">${r.date||''}</td></tr>`).join('')
+      : rows.map(r=>`<tr><td class="pdf-td">${r.number||''}</td><td class="pdf-td">${r.name||''}</td><td class="pdf-td">${r.work||''}</td><td class="pdf-td">${r.paymentType||''}</td><td class="pdf-td">${formatAmount(r.sar)}</td><td class="pdf-td">${r.date||''}</td></tr>`).join('');
+    
     container.innerHTML = `
       <style>
         .pdf-wrap{ font-family: Rubik, Alexandria, sans-serif; padding:16px; width:794px; color:#000; }
@@ -382,25 +427,11 @@
             <table class=\"pdf-table\">
               <thead class=\"pdf-thead\">
                 <tr>
-                  <th class=\"pdf-th\">الرقم</th>
-                  <th class=\"pdf-th\">الاسم</th>
-                  <th class=\"pdf-th\">العمل</th>
-                  <th class=\"pdf-th\">طريقة الدفع</th>
-                  <th class=\"pdf-th\">المبلغ</th>
-                  <th class=\"pdf-th\">التاريخ</th>
-                  <th class=\"pdf-th\">الفئة</th>
+                  ${headers}
                 </tr>
               </thead>
               <tbody class=\"pdf-tbody\">
-                ${rows.map(r=>`<tr>
-                  <td class=\\\"pdf-td\\\">${r.number||''}</td>
-                  <td class=\\\"pdf-td\\\">${r.name||''}</td>
-                  <td class=\\\"pdf-td\\\">${r.work||''}</td>
-                  <td class=\\\"pdf-td\\\">${r.paymentType||''}</td>
-                  <td class=\\\"pdf-td\\\">${formatAmount(r.sar)}</td>
-                  <td class=\\\"pdf-td\\\">${r.date||''}</td>
-                  <td class=\\\"pdf-td\\\">${r.category||''}</td>
-                </tr>`).join('')}
+                ${rowData}
               </tbody>
             </table>
           </div>

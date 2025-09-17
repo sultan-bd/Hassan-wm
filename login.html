@@ -36,12 +36,57 @@
     />
     <link rel="stylesheet" href="/assets/css/style.css?v=1.10" />
     <link rel="stylesheet" href="/assets/css/button-loading.css?v=1.10" />
+    <link rel="stylesheet" href="/assets/css/premium-animations.css" />
+    <link rel="stylesheet" href="/assets/css/premium-illustrations.css" />
     <!-- Welcome Popup CSS - Easy to remove by deleting this line -->
 
     <title>Log in - Hassan</title>
   </head>
   <body>
     <div class="wrapper">
+      <div class="login-character">
+        <svg viewBox="0 0 200 200" class="character-illustration">
+          <defs>
+            <linearGradient id="loginGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#ee9f0d;stop-opacity:0.8" />
+              <stop offset="100%" style="stop-color:#ff6a00;stop-opacity:0.6" />
+            </linearGradient>
+          </defs>
+          
+          <!-- Friendly character waving -->
+          <ellipse cx="100" cy="160" rx="30" ry="6" fill="#ddd" opacity="0.3"/>
+          
+          <!-- Body -->
+          <ellipse cx="100" cy="130" rx="20" ry="25" fill="url(#loginGrad)"/>
+          
+          <!-- Head -->
+          <circle cx="100" cy="90" r="18" fill="url(#loginGrad)"/>
+          
+          <!-- Eyes -->
+          <circle cx="94" cy="87" r="2" fill="#333"/>
+          <circle cx="106" cy="87" r="2" fill="#333"/>
+          
+          <!-- Happy smile -->
+          <path d="M 92 95 Q 100 102 108 95" stroke="#333" stroke-width="2" fill="none"/>
+          
+          <!-- Waving hand -->
+          <ellipse cx="75" cy="115" rx="8" ry="15" fill="url(#loginGrad)" transform="rotate(-20 75 115)">
+            <animateTransform attributeName="transform" type="rotate" values="-20 75 115;-10 75 115;-20 75 115" dur="1.5s" repeatCount="indefinite"/>
+          </ellipse>
+          
+          <!-- Other arm -->
+          <ellipse cx="125" cy="115" rx="8" ry="15" fill="url(#loginGrad)"/>
+          
+          <!-- Welcome sparkles -->
+          <circle cx="60" cy="60" r="2" fill="#ffd149" opacity="0.8">
+            <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="140" cy="70" r="1.5" fill="#ff6a00" opacity="0.6">
+            <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2.5s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+      </div>
+      
       <div class="welcome-message">
         <h1>مرحباً بك مرة أخرى !<span class="gradient-text">حسن</span></h1>
         <p>يسعدني رؤيتك مرة أخرى 😊</p>
@@ -114,5 +159,6 @@
     <script src="/assets/js/login.js?v=1.8"></script>
     <script src="/assets/js/auth-protection.js?v=1.10"></script>
     <!-- Welcome Popup Manager - Easy to remove by deleting this line -->
+    <script src="/assets/js/premium-animations.js"></script>
   </body>
 </html>

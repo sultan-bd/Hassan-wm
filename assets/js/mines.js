@@ -14,7 +14,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Fetch the next number from the backend when the page loads
   getNextNumber();
+  
+  // Add character illustration to feedback
+  enhanceFeedbackWithCharacters();
 });
+
+function enhanceFeedbackWithCharacters() {
+  const feedback = document.getElementById("feedback");
+  if (feedback) {
+    // Create character container
+    const characterContainer = document.createElement('div');
+    characterContainer.className = 'feedback-character-container';
+    characterContainer.style.display = 'none';
+    feedback.parentNode.insertBefore(characterContainer, feedback);
+  }
+}
 
 document
   .getElementById("submitForm")
@@ -83,6 +97,14 @@ document
 
 function showFeedback(message, type) {
   const feedback = document.getElementById("feedback");
+  const characterContainer = document.querySelector('.feedback-character-container');
+  
+  // Add character illustration
+  if (characterContainer) {
+    characterContainer.style.display = 'block';
+    characterContainer.innerHTML = type === 'success' ? getSuccessCharacter() : getErrorCharacter();
+  }
+  
   feedback.textContent = message;
   feedback.className = type; // Add the class based on the type (success/error)
   feedback.style.display = "block";
@@ -90,7 +112,72 @@ function showFeedback(message, type) {
   // Hide the feedback after 3 seconds
   setTimeout(() => {
     feedback.style.display = "none";
+    if (characterContainer) {
+      characterContainer.style.display = 'none';
+    }
   }, 3000);
+}
+
+function getSuccessCharacter() {
+  return `
+    <svg viewBox="0 0 200 200" class="feedback-character">
+      <defs>
+        <linearGradient id="successGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#28a745;stop-opacity:0.8" />
+          <stop offset="100%" style="stop-color:#20c997;stop-opacity:0.6" />
+        </linearGradient>
+      </defs>
+      
+      <!-- Happy character celebrating -->
+      <ellipse cx="100" cy="160" rx="30" ry="6" fill="#ddd" opacity="0.3"/>
+      
+      <!-- Body -->
+      <ellipse cx="100" cy="130" rx="18" ry="22" fill="url(#successGrad)"/>
+      
+      <!-- Head -->
+      <circle cx="100" cy="90" r="16" fill="url(#successGrad)"/>
+      
+      <!-- Happy eyes -->
+      <path d="M 92 87 Q 95 84 98 87" stroke="#333" stroke-width="2" fill="none"/>
+      <path d="M 102 87 Q 105 84 108 87" stroke="#333" stroke-width="2" fill="none"/>
+      
+      <!-- Big smile -->
+      <path d="M 90 95 Q 100 105 110 95" stroke="#333" stroke-width="2" fill="none"/>
+      
+      <!-- Arms up celebrating -->
+      <ellipse cx="80" cy="110" rx="6" ry="12" fill="url(#successGrad)" transform="rotate(-30 80 110)"/>
+      <ellipse cx="120" cy="110" rx="6" ry="12" fill="url(#successGrad)" transform="rotate(30 120 110)"/>
+    </svg>
+  `;
+}
+
+function getErrorCharacter() {
+  return `
+    <svg viewBox="0 0 200 200" class="feedback-character">
+      <defs>
+        <linearGradient id="errorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#dc3545;stop-opacity:0.8" />
+          <stop offset="100%" style="stop-color:#c82333;stop-opacity:0.6" />
+        </linearGradient>
+      </defs>
+      
+      <!-- Sad character -->
+      <ellipse cx="100" cy="160" rx="30" ry="6" fill="#ddd" opacity="0.3"/>
+      
+      <!-- Body -->
+      <ellipse cx="100" cy="130" rx="18" ry="22" fill="url(#errorGrad)"/>
+      
+      <!-- Head -->
+      <circle cx="100" cy="90" r="16" fill="url(#errorGrad)"/>
+      
+      <!-- Sad eyes -->
+      <circle cx="94" cy="87" r="2" fill="#333"/>
+      <circle cx="106" cy="87" r="2" fill="#333"/>
+      
+      <!-- Sad mouth -->
+      <path d="M 92 100 Q 100 95 108 100" stroke="#333" stroke-width="2" fill="none"/>
+    </svg>
+  `;
 }
 
 function getNextNumber() {

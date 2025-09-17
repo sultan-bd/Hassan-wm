@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="/assets/css/crud-mine.css" />
     <link rel="stylesheet" href="/assets/css/button-loading.css?v=1.10" />
     <link rel="stylesheet" href="/assets/css/crud.css" />
+    <link rel="stylesheet" href="/assets/css/premium-animations.css" />
+    <link rel="stylesheet" href="/assets/css/premium-illustrations.css" />
     <title>جميع البيانات - المصروف</title>
   </head>
   <body class="data-page">
@@ -23,26 +25,23 @@
       <header>
         <span class="plain-text">( حسن ) </span>
         <span class="gradient-text">بيانات المصروف</span>
-        <button type="button" class="logout-btn" id="logoutBtn" title="تسجيل الخروج">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-            <polyline points="16,17 21,12 16,7"></polyline>
-            <line x1="21" y1="12" x2="9" y2="12"></line>
-          </svg>
-        </button>
       </header>
 
       <div class="data-container">
         <div class="data-header">
-          <div class="data-title">
-            <span>📂</span>
-            <span>بيانات المصروف</span>
-          </div>
           <div class="input-group search-field">
             <span class="search-icon" aria-hidden="true">
               <svg class="icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
             </span>
-            <input id="searchInput" class="input-control" placeholder="بحث..." />
+            <input id="searchInput" class="input-control" placeholder="بحث في بيانات المصروف..." />
+          </div>
+          <div class="data-title">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff6a00" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+              <path d="M2 17l10 5 10-5"/>
+              <path d="M2 12l10 5 10-5"/>
+            </svg>
+            <span>بيانات المصروف</span>
           </div>
         </div>
 
@@ -76,18 +75,15 @@
             <thead>
               <tr>
                 <th style="width:36px"><input type="checkbox" id="selectAll" /></th>
-                <th data-sort="number">الرقم</th>
-                <th data-sort="name">الاسم</th>
-                <th data-sort="work">العمل</th>
-                <th data-sort="paymentType">طريقة الدفع</th>
-                <th data-sort="sar">المبلغ</th>
-                <th data-sort="date">التاريخ</th>
-                <th data-sort="category">الفئة</th>
+                <th data-sort="number">رقم</th>
+                <th data-sort="name">اسم</th>
+                <th data-sort="sar">ريال</th>
+                <th data-sort="date">تاريخ</th>
                 <th style="width:140px">الإجراءات</th>
               </tr>
             </thead>
             <tbody id="tableBody">
-              <tr><td colspan="9"><div class="empty-state">لا توجد بيانات بعد. سيتم تحميل البيانات فوراً...</div></td></tr>
+              <tr><td colspan="6"><div class="empty-state">لا توجد بيانات بعد. سيتم تحميل البيانات فوراً...</div></td></tr>
             </tbody>
           </table>
           <div class="pagination" id="pagination"></div>
@@ -124,17 +120,8 @@
               <div class="edit-grid">
                 <div class="input-group"><label>الرقم</label><input class="input-control" id="editNumber" required /></div>
                 <div class="input-group"><label>الاسم</label><input class="input-control" id="editName" required /></div>
-                <div class="input-group"><label>العمل</label><input class="input-control" id="editWork" /></div>
-                <div class="input-group"><label>طريقة الدفع</label><input class="input-control" id="editPaymentType" /></div>
                 <div class="input-group"><label>المبلغ (ريال)</label><input type="number" step="0.01" class="input-control" id="editSar" required /></div>
                 <div class="input-group"><label>التاريخ</label><input type="date" class="input-control" id="editDate" required /></div>
-                <div class="input-group"><label>الفئة</label>
-                  <select class="input-control" id="editCategory">
-                    <option value="income">دخل</option>
-                    <option value="expense">مصروف</option>
-                    <option value="report">تقرير</option>
-                  </select>
-                </div>
               </div>
               <div class="modal-actions">
                 <button type="button" class="btn ghost" id="btnCancelEdit">إلغاء</button>
@@ -168,5 +155,8 @@
     <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.5.31/dist/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <script src="/assets/js/crud.js"></script>
+    <script src="/assets/js/premium-animations.js"></script>
+    <script src="/assets/js/header-menu.js"></script>
+    <script src="/assets/js/premium-empty-states.js"></script>
   </body>
 </html>
